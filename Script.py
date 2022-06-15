@@ -5,6 +5,7 @@ Hey {} 
 I'ᴍ NORA Yᴏᴜ Cᴀɴ Cᴀʟʟ Mᴇ ᴀꜱ Aᴜᴛᴏ Fɪʟᴛᴇʀ Bᴏᴛ ᴠ3 
 
 Exᴄʟᴜꜱɪᴠᴇʟʏ Mᴀᴅᴇ Tʜɪꜱ Bᴏᴛ Fᴏʀ Tᴇᴀᴍ PIRATE..!!
+Did You Need This Bot Clone Then Type - /clone
 
  Sᴜᴘᴘᴏʀᴛ : @FilmPiratesGroup"""
     HELP_TXT = """𝙷𝙴𝚈 {}
