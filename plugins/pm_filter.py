@@ -155,19 +155,15 @@ async def next_page(bot, query):
         off_set = offset - 10
     if n_offset == 0:
         btn.append(
-            [InlineKeyboardButton("⏪ BACK", callback_data=f"next_{req}_{key}_{off_set}"),
-             InlineKeyboardButton(f"📃 Pages {round(int(offset) / 10) + 1} / {round(total / 10)}",
-                                  callback_data="pages")]
+            [InlineKeyboardButton("⏪ BACK", callback_data=f"next_{req}_{key}_{off_set}")]
         )
     elif off_set is None:
         btn.append(
-            [InlineKeyboardButton(f"🗓 {round(int(offset) / 10) + 1} / {round(total / 10)}", callback_data="pages"),
-             InlineKeyboardButton("NEXT ⏩", callback_data=f"next_{req}_{key}_{n_offset}")])
+            [InlineKeyboardButton("NEXT ⏩", callback_data=f"next_{req}_{key}_{n_offset}")])
     else:
         btn.append(
             [
                 InlineKeyboardButton("⏪ BACK", callback_data=f"next_{req}_{key}_{off_set}"),
-                InlineKeyboardButton(f"🗓 {round(int(offset) / 10) + 1} / {round(total / 10)}", callback_data="pages"),
                 InlineKeyboardButton("NEXT ⏩", callback_data=f"next_{req}_{key}_{n_offset}")
             ],
         )
@@ -513,8 +509,9 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('AF-BOT-G', url='https://t.me/PirateBotGroup'),
             InlineKeyboardButton('SERIES-C', url='https://t.me/FilimPiratesSeries')
         ], [
-            InlineKeyboardButton('GROUP', url='https://t.me/FilmPiratesGroup'),
-            InlineKeyboardButton('OFFICAL-C', url='https://t.me/FilmPiratesOfficial')
+            InlineKeyboardButton('⭕OUR MAIN GROUP⭕', url='https://t.me/FilmPiratesGroup')
+        ], [
+            InlineKeyboardButton('🖥️OUR CHANNEL LINK🖥️', url='https://t.me/FilmPiratesOfficial')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
