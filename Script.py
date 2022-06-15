@@ -31,3 +31,8 @@ Added By - {}
 ID - <code>{}</code>
 Name - {}
 """
+    
+    PRIVATEBOT_TXT = """<b>PRIVATE BOT FOR YOU</b>
+<b>› Do You Want A Bot Like This </b>
+<b>› With All Your Creadets</b>
+<b>› With Your Ownership</b>"""
