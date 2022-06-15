@@ -43,8 +43,9 @@ async def start(client, message):
             InlineKeyboardButton('AF-BOT-G', url='https://t.me/PirateBotGroup'),
             InlineKeyboardButton('SERIES-C', url='https://t.me/FilimPiratesSeries')
             ],[
-            InlineKeyboardButton('GROUP', url='https://t.me/FilmPiratesGroup'),
-            InlineKeyboardButton('OFFICAL-C', url='https://t.me/FilmPiratesOfficial')
+            InlineKeyboardButton('⭕OUR MAIN GROUP⭕', url='https://t.me/FilmPiratesGroup')
+            ],[
+            InlineKeyboardButton('🖥️OUR CHANNEL LINK🖥️', url='https://t.me/FilmPiratesOfficial')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
@@ -88,8 +89,9 @@ async def start(client, message):
             InlineKeyboardButton('AF-BOT-G', url='https://t.me/PirateBotGroup'),
             InlineKeyboardButton('SERIES-C', url='https://t.me/FilimPiratesSeries')
             ],[
-            InlineKeyboardButton('GROUP', url='https://t.me/FilmPiratesGroup'),
-            InlineKeyboardButton('OFFICAL-C', url='https://t.me/FilmPiratesOfficial')
+            InlineKeyboardButton('⭕OUR MAIN GROUP⭕', url='https://t.me/FilmPiratesGroup')
+            ],[
+            InlineKeyboardButton('🖥️OUR CHANNEL LINK🖥️', url='https://t.me/FilmPiratesOfficial')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
