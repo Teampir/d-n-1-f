@@ -83,12 +83,12 @@ async def next_page(bot, query):
             for file in files
         ]
 
-    if 0 < offset <= 10:
+    if 0 < offset <= 5:
         off_set = 0
     elif offset == 0:
         off_set = None
     else:
-        off_set = offset - 10
+        off_set = offset - 5
     if n_offset == 0:
         btn.append(
             [InlineKeyboardButton("⏪ BACK", callback_data=f"next_{req}_{key}_{off_set}")]
@@ -684,7 +684,7 @@ async def auto_filter(client, msg, spoll=False):
             **locals()
         )
     else:
-        cap = f"<b>Hey 👋 {message.from_user.mention}.😍\n\n📁 Found ✨ {len(files)} Files For Your Query : #{search} 👇</s>"
+        cap = f"<b>Hey 👋 {message.from_user.mention}.😍\n\n📁 Found ✨ {files} Files For Your Query : #{search} 👇</s>"
     if imdb and imdb.get('poster'):
         try:
             hehe = await message.reply_photo(photo=imdb.get('poster'), caption=cap[:1024], reply_markup=InlineKeyboardMarkup(btn))
@@ -830,6 +830,7 @@ async def manual_filters(client, message, text=False):
                         )
                 except Exception as e:
                     logger.exception(e)
+                await asyncio.sleep(1800)
                 break
     else:
         return False
