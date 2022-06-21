@@ -17,6 +17,7 @@ API_HASH = environ['API_HASH']
 BOT_TOKEN = environ['BOT_TOKEN']
 
 # Bot settings
+ENABLED_LOCALES = [str(i) for i in config("ENABLED_LOCALES", default="en").split()]
 LOGGER = True
 CACHE_TIME = int(environ.get('CACHE_TIME', 300))
 USE_CAPTION_FILTER = bool(environ.get('USE_CAPTION_FILTER', False))
