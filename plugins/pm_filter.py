@@ -702,13 +702,13 @@ async def auto_filter(client, msg, spoll=False):
             await message.reply(f"<b>⚙️ {message.from_user.mention} Fɪʟᴛᴇʀ Fᴏʀ {search} Cʟᴏꜱᴇᴅ 🗑️</b>")
         except Exception as e:
             logger.exception(e)
-            fek = await message.reply_photo(photo="https://telegra.ph/file/ac686300a29c508ebf234.jpg", caption=cap, reply_markup=InlineKeyboardMarkup(btn))
+            fek = await message.reply_photo(photo="https://telegra.ph/file/717c309473f87a0c3313c.jpg", caption=cap, reply_markup=InlineKeyboardMarkup(btn))
             await asyncio.sleep(120)
             await fek.delete()
             await msg.delete()
             await message.reply(f"<b>⚙️ {message.from_user.mention} Fɪʟᴛᴇʀ Fᴏʀ {search} Cʟᴏꜱᴇᴅ 🗑️</b>")
     else:
-        fuk = await message.reply_photo(photo="https://telegra.ph/file/ac686300a29c508ebf234.jpg", caption=cap, reply_markup=InlineKeyboardMarkup(btn))
+        fuk = await message.reply_photo(photo="https://telegra.ph/file/717c309473f87a0c3313c.jpg", caption=cap, reply_markup=InlineKeyboardMarkup(btn))
         await asyncio.sleep(120)
         await fuk.delete()
         await msg.delete()
@@ -781,7 +781,7 @@ async def advantage_spell_chok(msg):
         InlineKeyboardButton("ɪɴꜰᴏ", callback_data='fp'),
         InlineKeyboardButton("ꜱᴇʀɪᴇꜱ", callback_data='ser')
     ])
-    m = await msg.reply_photo(photo="https://telegra.ph/file/ac686300a29c508ebf234.jpg", caption=f"📍Hey, {msg.from_user.mention} I couldn't find anything related to that\nDid you mean any one of these?",
+    m = await msg.reply_photo(photo="https://telegra.ph/file/717c309473f87a0c3313c.jpg", caption=f"📍Hey, {msg.from_user.mention} I couldn't find anything related to that\nDid you mean any one of these?",
                     reply_markup=InlineKeyboardMarkup(btn))
     await asyncio.sleep(17)
     await m.delete()
