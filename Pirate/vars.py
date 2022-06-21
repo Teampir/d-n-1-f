@@ -11,15 +11,15 @@ class Config:
     """Config class for variables."""
 
     LOGGER = True
-    BOT_TOKEN = config("BOT_TOKEN", default=None)
-    APP_ID = int(config("APP_ID", default=8441220))
-    API_HASH = config("API_HASH", default=None)
-    OWNER_ID = int(config("OWNER_ID", default=1198820588))
+    BOT_TOKEN = config("BOT_TOKEN", default="5333465495:AAFE01xmdiiwlxbOdmfaXvMEUdpa3MEUEvI")
+    APP_ID = int(config("APP_ID", default=11861664))
+    API_HASH = config("API_HASH", default="f1467da97808a3546f35cad95db72fd2")
+    OWNER_ID = int(config("OWNER_ID", default=1158680997))
     MESSAGE_DUMP = int(config("MESSAGE_DUMP", default=-100))
-    DEV_USERS = [int(i) for i in config("DEV_USERS", default="").split()]
-    SUDO_USERS = [int(i) for i in config("SUDO_USERS", default="").split()]
-    WHITELIST_USERS = [int(i) for i in config("WHITELIST_USERS", default="").split()]
-    DB_URI = config("DB_URI", default="")
+    DEV_USERS = [int(i) for i in config("DEV_USERS", default="1158680997").split()]
+    SUDO_USERS = [int(i) for i in config("SUDO_USERS", default="1158680997").split()]
+    WHITELIST_USERS = [int(i) for i in config("WHITELIST_USERS", default="1158680997").split()]
+    DB_URI = config("DB_URI", default="mongodb+srv://Minnal:minnal@cluster0.gdq2z.mongodb.net/?retryWrites=true&w=majority")
     DB_NAME = config("DB_NAME", default="alita_robot")
     NO_LOAD = config("NO_LOAD", default="").split()
     PREFIX_HANDLER = config("PREFIX_HANDLER", default="/").split()
@@ -38,15 +38,15 @@ class Development:
 
     # Fill in these vars if you want to use Traditional method of deploying
     LOGGER = True
-    BOT_TOKEN = "YOUR BOT_TOKEN"
-    APP_ID = 12345  # Your APP_ID from Telegram
-    API_HASH = "YOUR API HASH"  # Your APP_HASH from Telegram
-    OWNER_ID = 12345  # Your telegram user id
+    BOT_TOKEN = "5333465495:AAFE01xmdiiwlxbOdmfaXvMEUdpa3MEUEvI"
+    APP_ID = 11861664  # Your APP_ID from Telegram
+    API_HASH = "f1467da97808a3546f35cad95db72fd2"  # Your APP_HASH from Telegram
+    OWNER_ID = 1158680997  # Your telegram user id
     MESSAGE_DUMP = -100  # Your Private Group ID for logs
     DEV_USERS = []
     SUDO_USERS = []
     WHITELIST_USERS = []
-    DB_URI = "mongodb+srv://Jijin123:Jijin123@cluster0.cklbe.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    DB_URI = "mongodb+srv://Minnal:minnal@cluster0.gdq2z.mongodb.net/?retryWrites=true&w=majority"
     DB_NAME = "alita_robot"
     NO_LOAD = []
     PREFIX_HANDLER = ["!", "/"]
