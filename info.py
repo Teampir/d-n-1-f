@@ -9,6 +9,8 @@ def is_enabled(value, default):
         return False
     else:
         return default
+    
+config = Configuration(loaders=[Environment(), EnvFile(filename=env_file)])
 
 # Bot information
 SESSION = environ.get('SESSION', 'Media_search')
