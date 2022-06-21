@@ -11,7 +11,7 @@ from info import ADMINS
 from database.disable_db import DISABLED_CMDS
 from Pirate.tr_engine import tlang
 from Pirate.utils.caching import ADMIN_CACHE, admin_cache_reload
-from info import Config
+from Pirate.vars import Config
 
 SUDO_LEVEL = set(ADMINS + [int(ADMINS)])
 DEV_LEVEL = set(ADMINS + [int(ADMINS)])
