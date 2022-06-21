@@ -8,7 +8,7 @@ from pyrogram import Client as Pirate
 from database.users_db import Users
 
 
-async def extract_user(c: Alita, m: Message) -> Tuple[int, str, str]:
+async def extract_user(c: Pirate, m: Message) -> Tuple[int, str, str]:
     """Extract the user from the provided message."""
     user_id = None
     user_first_name = None
