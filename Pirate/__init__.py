@@ -41,9 +41,9 @@ if version_info[0] < 3 or version_info[1] < 7:
 # the secret configuration specific things
 try:
     if environ.get("ENV"):
-        from Alita.vars import Config
+        from Pirate.vars import Config
     else:
-        from Alita.vars import Development as Config
+        from Pirate.vars import Development as Config
 except Exception as ef:
     LOGGER.error(ef)  # Print Error
     LOGGER.error(format_exc())
