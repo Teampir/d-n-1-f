@@ -444,54 +444,63 @@ async def settings(client, message):
                     'Single' if settings["button"] else 'Double',
                     callback_data=f'setgs#button#{settings["button"]}#{grp_id}',
                 ),
+            ],[
+                InlineKeyboardButton(
+                    'Redirect To',
+                    callback_data=f'setgs#redirect_to#{settings["redirect_to"]}#{grp_id}',
+                ),
+                InlineKeyboardButton(
+                    '👤 PM' if settings["redirect_to"] == "PM" else '📄 Chat',
+                    callback_data=f'setgs#redirect_to#{settings["redirect_to"]}#{grp_id}',
+                ),
             ],
             [
                 InlineKeyboardButton(
-                    'Filter',
+                    'Bot PM',
                     callback_data=f'setgs#botpm#{settings["botpm"]}#{grp_id}',
                 ),
                 InlineKeyboardButton(
-                    'PM' if settings["botpm"] else 'CHAT',
+                    '✅ Yes' if settings["botpm"] else '❌ No',
                     callback_data=f'setgs#botpm#{settings["botpm"]}#{grp_id}',
                 ),
             ],
             [
                 InlineKeyboardButton(
-                    '𝐅𝐈𝐋𝐄 𝐒𝐄𝐂𝐔𝐑𝐄',
+                    'File Secure',
                     callback_data=f'setgs#file_secure#{settings["file_secure"]}#{grp_id}',
                 ),
                 InlineKeyboardButton(
-                    '✅ 𝐘𝐄𝐒' if settings["file_secure"] else '🗑️ 𝐍𝐎',
+                    '✅ Yes' if settings["file_secure"] else '❌ No',
                     callback_data=f'setgs#file_secure#{settings["file_secure"]}#{grp_id}',
                 ),
             ],
             [
                 InlineKeyboardButton(
-                    '𝐈𝐌𝐃𝐁',
+                    'IMDB',
                     callback_data=f'setgs#imdb#{settings["imdb"]}#{grp_id}',
                 ),
                 InlineKeyboardButton(
-                    '✅ 𝐘𝐄𝐒' if settings["imdb"] else '🗑️ 𝐍𝐎',
+                    '✅ Yes' if settings["imdb"] else '❌ No',
                     callback_data=f'setgs#imdb#{settings["imdb"]}#{grp_id}',
                 ),
             ],
             [
                 InlineKeyboardButton(
-                    '𝐒𝐏𝐄𝐋𝐋 𝐂𝐇𝐄𝐂𝐊',
+                    'Spell Check',
                     callback_data=f'setgs#spell_check#{settings["spell_check"]}#{grp_id}',
                 ),
                 InlineKeyboardButton(
-                    '✅ 𝐘𝐄𝐒' if settings["spell_check"] else '🗑️ 𝐍𝐎',
+                    '✅ Yes' if settings["spell_check"] else '❌ No',
                     callback_data=f'setgs#spell_check#{settings["spell_check"]}#{grp_id}',
                 ),
             ],
             [
                 InlineKeyboardButton(
-                    '𝐖𝐄𝐋𝐂𝐎𝐌𝐄',
+                    'Welcome',
                     callback_data=f'setgs#welcome#{settings["welcome"]}#{grp_id}',
                 ),
                 InlineKeyboardButton(
-                    '✅ 𝐘𝐄𝐒' if settings["welcome"] else '🗑️ 𝐍𝐎',
+                    '✅ Yes' if settings["welcome"] else '❌ No',
                     callback_data=f'setgs#welcome#{settings["welcome"]}#{grp_id}',
                 ),
             ],
@@ -500,7 +509,7 @@ async def settings(client, message):
         reply_markup = InlineKeyboardMarkup(buttons)
 
         await message.reply_text(
-            text=f"<b>CHANGE THE BOT SETTING FOR {title}../</b>",
+            text=f"<b>Change Your Settings for {title} As Your Wish ⚙</b>",
             reply_markup=reply_markup,
             disable_web_page_preview=True,
             parse_mode="html",
