@@ -1,5 +1,7 @@
+import imp
 import os
 import logging
+import pyrogram
 import random
 import asyncio
 from Script import script
@@ -8,7 +10,7 @@ from pyrogram.errors import ChatAdminRequired, FloodWait
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from database.ia_filterdb import Media, get_file_details, unpack_new_file_id
 from database.users_chats_db import db
-from info import CHANNELS, ADMINS, AUTH_CHANNEL, LOG_CHANNEL, PICS, BATCH_FILE_CAPTION, CUSTOM_FILE_CAPTION, PROTECT_CONTENT
+from info import CHANNELS, ADMINS, AUTH_CHANNEL, LOG_CHANNEL, PICS, BATCH_FILE_CAPTION, CUSTOM_FILE_CAPTION, PROTECT_CONTENT, START_IMAGE_URL
 from utils import get_settings, get_size, is_subscribed, save_group_settings, temp
 from database.connections_mdb import active_connection
 import re
@@ -18,37 +20,21 @@ logger = logging.getLogger(__name__)
 
 BATCH_FILES = {}
 
-@Client.on_message(filters.command("start"))
-async def start(client, message):
+@Client.on_message(filters.command("start") & filters.incoming & ~filters.edited)
+async def start(client, message: pyrogram.types.Message):
+
     if message.chat.type in ['group', 'supergroup']:
-        buttons = [
-            [
-                InlineKeyboardButton('PRIVATE BOT', url=f"https://t.me/PiratesDeveloper")
-            ]
-            ]
-        reply_markup = InlineKeyboardMarkup(buttons)
-        await message.reply(script.PRIVATEBOT_TXT.format(message.from_user.mention if message.from_user else message.chat.title, temp.U_NAME, temp.B_NAME), reply_markup=reply_markup)
-        await asyncio.sleep(2) # 😢 https://github.com/Aadhi000/Ajax-Extra-Features/blob/master/plugins/p_ttishow.py#L17 😬 wait a bit, before checking.
-        if not await db.get_chat(message.chat.id):
-            total=await client.get_chat_members_count(message.chat.id)
-            await client.send_message(LOG_CHANNEL, script.LOG_TEXT_G.format(message.chat.title, message.chat.id, total, "Unknown"))       
-            await db.add_chat(message.chat.id, message.chat.title)
-        return
-    if not await db.is_user_exist(message.from_user.id):
-        await db.add_user(message.from_user.id, message.from_user.first_name)
-        await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention))
-    if len(message.command) != 2:
         buttons = [[
-            InlineKeyboardButton('AF-BOT-C', url='https://t.me/FPBotUpdates'),
-            InlineKeyboardButton('AF-BOT-G', url='https://t.me/PirateBotGroup'),
-            InlineKeyboardButton('SERIES-C', url='https://t.me/FilimPiratesSeries')
-            ],[
-            InlineKeyboardButton('⭕OUR MAIN GROUP⭕', url='https://t.me/FilmPiratesGroup')
-            ],[
-            InlineKeyboardButton('🖥️OUR CHANNEL LINK🖥️', url='https://t.me/FilmPiratesOfficial')
-        ]]
+        InlineKeyboardButton('Developers', url='https://t.me/CrazyBotsz'),
+        InlineKeyboardButton('Source Code 🧾', url ='https://github.com/CrazyBotsz/Adv-Auto-Filter-Bot-V2')
+    ],[
+        InlineKeyboardButton('➕ Add Me To Your Groups ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
+    ],[
+        InlineKeyboardButton('Help ⚙', callback_data='admin')
+    ]]
+       
         reply_markup = InlineKeyboardMarkup(buttons)
-        if not PICS:
+        if not START_IMAGE_URL:
             await message.reply(
                 script.START_TXT.format(
                     (message.from_user.mention if 
@@ -61,7 +47,7 @@ async def start(client, message):
             )
         else:
             await message.reply_photo(
-                photo=PICS,
+                photo=START_IMAGE_URL,
                 caption=script.START_TXT.format(
                     (message.from_user.mention if 
                     message.from_user else 
@@ -71,7 +57,44 @@ async def start(client, message):
                 ),
                 reply_markup=reply_markup
             )
+        await asyncio.sleep(2) # 😢 https://github.com/EvamariaTG/EvaMaria/blob/master/plugins/p_ttishow.py#L17 😬 wait a bit, before checking.
+        
+        if not await db.get_chat(message.chat.id):
+            total=await client.get_chat_members_count(message.chat.id)
+            await client.send_message(LOG_CHANNEL, script.LOG_TEXT_G.format(message.chat.title, message.chat.id, total, "Unknown"))       
+            await db.add_chat(message.chat.id, message.chat.title)
+        return 
+    
+    if not await db.is_user_exist(message.from_user.id):
+        await db.add_user(message.from_user.id, message.from_user.first_name)
+        await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention))
+    
+    if len(message.command) != 2:
+
+        buttons = [[
+        InlineKeyboardButton('Developers', url='https://t.me/CrazyBotsz'),
+        InlineKeyboardButton('Source Code 🧾', url ='https://github.com/CrazyBotsz/Adv-Auto-Filter-Bot-V2')
+    ],[
+        InlineKeyboardButton('➕ Add Me To Your Groups ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
+    ],[
+        InlineKeyboardButton('Help ⚙', callback_data='admin')
+    ]]
+
+        reply_markup = InlineKeyboardMarkup(buttons)
+
+        await message.reply_photo(
+            photo=START_IMAGE_URL if START_IMAGE_URL else random.choice(PICS),
+            caption=script.START_TXT.format(
+                (message.from_user.mention if 
+                message.from_user else 
+                message.chat.title), 
+                temp.U_NAME, 
+                temp.B_NAME,
+            ),
+            reply_markup=reply_markup
+        )
         return
+
     if AUTH_CHANNEL and not await is_subscribed(client, message):
         try:
             invite_link = await client.create_chat_invite_link(int(AUTH_CHANNEL))
@@ -87,12 +110,9 @@ async def start(client, message):
         ]
 
         if message.command[1] != "subscribe":
-            try:
-            	kk, file_id = message.command[1].split("_", 1)
-            	pre = 'checksubp' if kk == 'filep' else 'checksub' 
-            	btn.append([InlineKeyboardButton(" 🔄 Try Again", callback_data=f"{pre}#{file_id}")])
-            except IndexError:
-                btn.append([InlineKeyboardButton(" 🔄 Try Again", url=f"https://t.me/{temp.U_NAME}/{message.command[1]}")])
+            kk, file_id = message.command[1].split("_", 1)
+            pre = 'checksubp' if kk == 'filep' else 'checksub' 
+            btn.append([InlineKeyboardButton(" 🔄 Try Again", callback_data=f"{pre}#{file_id}")])
         await client.send_message(
             chat_id=message.from_user.id,
             text="**Please Join My Updates Channel to use this Bot!**",
@@ -100,40 +120,25 @@ async def start(client, message):
             parse_mode="markdown"
             )
         return
+
     if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
+
         buttons = [[
-            InlineKeyboardButton('AF-BOT-C', url='https://t.me/FPBotUpdates'),
-            InlineKeyboardButton('AF-BOT-G', url='https://t.me/PirateBotGroup'),
-            InlineKeyboardButton('SERIES-C', url='https://t.me/FilimPiratesSeries')
-            ],[
-            InlineKeyboardButton('⭕OUR MAIN GROUP⭕', url='https://t.me/FilmPiratesGroup')
-            ],[
-            InlineKeyboardButton('🖥️OUR CHANNEL LINK🖥️', url='https://t.me/FilmPiratesOfficial')
-        ]]
+        InlineKeyboardButton('Developers', url='https://t.me/CrazyBotsz'),
+        InlineKeyboardButton('Source Code 🧾', url ='https://github.com/CrazyBotsz/Adv-Auto-Filter-Bot-V2')
+    ],[
+        InlineKeyboardButton('➕ Add Me To Your Groups ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
+    ],[
+        InlineKeyboardButton('Help ⚙', callback_data='admin')
+    ]]
+        
         reply_markup = InlineKeyboardMarkup(buttons)
-        if not PICS:
-            await message.reply(
-                script.START_TXT.format(
-                    (message.from_user.mention if 
-                    message.from_user else 
-                    message.chat.title), 
-                    temp.U_NAME, 
-                    temp.B_NAME,
-                ),
-                reply_markup=reply_markup
-            )
-        else:
-            await message.reply_photo(
-                photo=PICS,
-                caption=script.START_TXT.format(
-                    (message.from_user.mention if 
-                    message.from_user else 
-                    message.chat.title), 
-                    temp.U_NAME, 
-                    temp.B_NAME,
-                ),
-                reply_markup=reply_markup
-            )
+        await message.reply_photo(
+            photo=START_IMAGE_URL if START_IMAGE_URL else random.choice(PICS),
+            caption=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
+            reply_markup=reply_markup,
+            parse_mode='html'
+        )
         return
     data = message.command[1]
     try:
