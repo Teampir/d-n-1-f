@@ -528,24 +528,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 ),
                 reply_markup=reply_markup
             )
-        await query.answer('Piracy Is Crime')
-    elif query.data == "help":
-        buttons = [[
-            InlineKeyboardButton('AF-BOT-C', url='https://t.me/FPBotUpdates'),
-            InlineKeyboardButton('AF-BOT-G', url='https://t.me/PirateBotGroup'),
-            InlineKeyboardButton('SERIES-C', url='https://t.me/FilimPiratesSeries')
-            ],[
-            InlineKeyboardButton('⭕OUR MAIN GROUP⭕', url='https://t.me/FilmPiratesGroup')
-            ],[
-            InlineKeyboardButton('🖥️OUR CHANNEL LINK🖥️', url='https://t.me/FilmPiratesOfficial')
-            ],[
-            InlineKeyboardButton('📜ABOUT📜', callback_data='about')
-        ]]
-        reply_markup = InlineKeyboardMarkup(buttons)
-            text=script.HELP_TXT.format(query.from_user.mention),
-            reply_markup=reply_markup,
-            parse_mode='html'
-        )
     elif query.data == "about":
         await query.message.delete()
         await query.message.reply_sticker(
