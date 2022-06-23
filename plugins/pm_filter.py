@@ -366,7 +366,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             return await query.answer("⚠️ Bro, search your on file, don't click others request file🥵.  ⚠️Bro മറ്റുള്ളവർ റിക്വസ്റ്റ് ചെയ്ത മൂവിയിൽ കുത്തി നോക്കാതെ ഡ്രോയിങ് വേണ്ടത് ബ്രോ റിക്വസ്റ്റ് ചെയ്യുക🤒.", show_alert=True)
 
         files_ = await get_file_details(file_id)
-        i not files_:
+        if not files_:
             return await query.answer('No such file exist.')
         files = files_[0]
         title = files.file_name
