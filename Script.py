@@ -1,10 +1,7 @@
 class script(object):
     START_TXT = """𝙷𝙴𝙻𝙾 {},
 Hey {} 
-
-I'ᴍ NORA Yᴏᴜ Cᴀɴ Cᴀʟʟ Mᴇ ᴀꜱ Aᴜᴛᴏ Fɪʟᴛᴇʀ Bᴏᴛ ᴠ3 
-
-Exᴄʟᴜꜱɪᴠᴇʟʏ Mᴀᴅᴇ Tʜɪꜱ Bᴏᴛ Fᴏʀ Tᴇᴀᴍ PIRATE..!!
+I'ᴍ MinnalMUrail Yᴏᴜ Cᴀɴ Cᴀʟʟ Mᴇ ᴀꜱ Aᴜᴛᴏ Fɪʟᴛᴇʀ Bᴏᴛ ᴠ3 
 Did You Need This Bot Clone Then Type - /clone
 
  Sᴜᴘᴘᴏʀᴛ : @FilmPiratesGroup"""
