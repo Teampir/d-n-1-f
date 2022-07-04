@@ -28,6 +28,7 @@ logger.setLevel(logging.ERROR)
 
 BUTTONS = {}
 SPELL_CHECK = {}
+FILTER_MODE = {}
 
 
 @Client.on_message(filters.command('autofilter'))
