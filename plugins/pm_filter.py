@@ -594,7 +594,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 ],
                 [
                     InlineKeyboardButton('Filter', callback_data=f'setgs#botpm#{settings["botpm"]}#{str(grp_id)}'),
-                    InlineKeyboardButton('PM' if settings["botpm"] else 'CHAT',
+                    InlineKeyboardButton('❄PM' if settings["botpm"] else '⚡CHAT',
                                          callback_data=f'setgs#botpm#{settings["botpm"]}#{str(grp_id)}')
                 ],
                 [
