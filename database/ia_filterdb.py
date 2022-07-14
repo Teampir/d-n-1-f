@@ -66,7 +66,7 @@ async def save_file(media):
 
 
 
-async def get_search_results(query, file_type=None, max_results=10, offset=0, filter=False):
+async def get_search_results(query, file_type=None, max_results=6, offset=0, filter=10):
     """For given query return (results, next_offset)"""
 
     query = query.strip()
