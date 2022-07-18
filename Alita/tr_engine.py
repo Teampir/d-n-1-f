@@ -1,3 +1,10 @@
+from os import getcwd
+from prettyconf import Configuration
+from prettyconf.loaders import EnvFile, Environment
+
+
+env_file = f"{getcwd()}/.env"
+config = Configuration(loaders=[Environment(), EnvFile(filename=env_file)])
 
 import logging
 import logging.config
@@ -18,7 +25,8 @@ from yaml import FullLoader
 from yaml import load as load_yml
 
 from database.lang_db import Langs
-from Alita import ENABLED_LOCALES
+
+ENABLED_LOCALES = [str(i) for i in config("ENABLED_LOCALES", default="en").split()]
 
 # Initialise
 LANG_LOCK = RLock()
