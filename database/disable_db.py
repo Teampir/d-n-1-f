@@ -1,3 +1,10 @@
+import logging
+import logging.config
+
+# Get logging configurations
+logging.config.fileConfig('logging.conf')
+logging.getLogger().setLevel(logging.INFO)
+
 from threading import RLock
 from time import time
 
@@ -154,7 +161,7 @@ class Disabling(MongoDB):
                     "action": "none"
                 }
                 self.insert_one(new_data)
-                LOGGER.info(
+                logging.info(
                     f"Initialized Disabling Document for chat {self.chat_id}")
                 return new_data
             DISABLED_CMDS[self.chat_id] = chat_data
@@ -188,7 +195,7 @@ class Disabling(MongoDB):
                 try:
                     _ = data[key]
                 except KeyError:
-                    LOGGER.warning(
+                    logging.warning(
                         f"Repairing Disabling Database - setting '{key}:{val}' for {data['_id']}",
                     )
                     collection.update({"_id": data["_id"]}, {key: val})
@@ -199,7 +206,7 @@ def __pre_req_disabling():
     LOGGER.info("Starting disabling Database Repair ...")
     collection = MongoDB(Disabling.db_name)
     Disabling.repair_db(collection)
-    LOGGER.info(f"Done in {round((time() - start), 3)}s!")
+    logging.info(f"Done in {round((time() - start), 3)}s!")
 
 
 __pre_req_disabling()
