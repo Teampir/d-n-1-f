@@ -1,3 +1,10 @@
+import logging
+import logging.config
+
+# Get logging configurations
+logging.config.fileConfig('logging.conf')
+logging.getLogger().setLevel(logging.INFO)
+
 from pyrogram import filters
 from pyrogram.errors import PeerIdInvalid, RPCError, UserNotParticipant
 from pyrogram.types import CallbackQuery, ChatPermissions, Message
@@ -51,7 +58,7 @@ async def approve_user(c: Alita, m: Message):
         )
         return
     db.add_approve(user_id, user_first_name)
-    LOGGER.info(f"{user_id} approved by {m.from_user.id} in {m.chat.id}")
+    logging.info(f"{user_id} approved by {m.from_user.id} in {m.chat.id}")
 
     # Allow all permissions
     try:
@@ -90,7 +97,7 @@ async def disapprove_user(c: Alita, m: Message):
     except UserNotParticipant:
         if already_approved:  # If user is approved and not in chat, unapprove them.
             db.remove_approve(user_id)
-            LOGGER.info(f"{user_id} disapproved in {m.chat.id} as UserNotParticipant")
+            logging.info(f"{user_id} disapproved in {m.chat.id} as UserNotParticipant")
         await m.reply_text("This user is not in this chat, unapproved them.")
         return
     except RPCError as ef:
@@ -110,7 +117,7 @@ async def disapprove_user(c: Alita, m: Message):
         return
 
     db.remove_approve(user_id)
-    LOGGER.info(f"{user_id} disapproved by {m.from_user.id} in {m.chat.id}")
+    logging.info(f"{user_id} disapproved by {m.from_user.id} in {m.chat.id}")
 
     # Set permission same as of current user by fetching them from chat!
     await m.chat.restrict_member(
@@ -147,7 +154,7 @@ async def check_approved(_, m: Message):
             pass
         msg += f"- `{user_id}`: {user_name}\n"
     await m.reply_text(msg)
-    LOGGER.info(f"{m.from_user.id} checking approved users in {m.chat.id}")
+    logging.info(f"{m.from_user.id} checking approved users in {m.chat.id}")
     return
 
 
@@ -160,7 +167,7 @@ async def check_approval(c: Alita, m: Message):
     except Exception:
         return
     check_approve = db.check_approve(user_id)
-    LOGGER.info(f"{m.from_user.id} checking approval of {user_id} in {m.chat.id}")
+    logging.info(f"{m.from_user.id} checking approval of {user_id} in {m.chat.id}")
 
     if not user_id:
         await m.reply_text(
@@ -223,7 +230,7 @@ async def unapproveall_callback(_, q: CallbackQuery):
             permissions=q.message.chat.permissions,
         )
     await q.message.delete()
-    LOGGER.info(f"{user_id} disapproved all users in {q.message.chat.id}")
+    logging.info(f"{user_id} disapproved all users in {q.message.chat.id}")
     await q.answer("Disapproved all users!", show_alert=True)
     return
 
