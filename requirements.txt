@@ -9,3 +9,4 @@ bs4
 imdbpy
 prettyconf==2.2.1
 pyyaml
+cachetools
