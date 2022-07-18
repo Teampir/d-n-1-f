@@ -203,7 +203,7 @@ class Disabling(MongoDB):
 
 def __pre_req_disabling():
     start = time()
-    LOGGER.info("Starting disabling Database Repair ...")
+    logging.info("Starting disabling Database Repair ...")
     collection = MongoDB(Disabling.db_name)
     Disabling.repair_db(collection)
     logging.info(f"Done in {round((time() - start), 3)}s!")
