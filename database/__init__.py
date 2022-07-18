@@ -8,11 +8,11 @@ from info import DATABASE_URI, DATABASE_NAME
 LOGGER = True
   
 try:
-    alita_db_client = MongoClient(DB_URI)
+    alita_db_client = MongoClient(DATABASE_URI)
 except PyMongoError as f:
     LOGGER.error(f"Error in Mongodb: {f}")
     exiter(1)
-alita_main_db = alita_db_client[DB_NAME]
+alita_main_db = alita_db_client[DATABASE_NAME]
 
 
 class MongoDB:
