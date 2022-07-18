@@ -1,3 +1,9 @@
+import logging.config
+
+# Get logging configurations
+logging.config.fileConfig('logging.conf')
+logging.getLogger().setLevel(logging.INFO)
+
 from threading import RLock
 
 from database import MongoDB
@@ -66,7 +72,7 @@ class Approve(MongoDB):
         if not chat_data:
             new_data = {"_id": self.chat_id, "users": []}
             self.insert_one(new_data)
-            LOGGER.info(f"Initialized Approve Document for chat {self.chat_id}")
+            logging.info(f"Initialized Approve Document for chat {self.chat_id}")
             return new_data
         return chat_data
 
@@ -100,7 +106,7 @@ class Approve(MongoDB):
                 try:
                     _ = data[key]
                 except KeyError:
-                    LOGGER.warning(
+                    logging.warning(
                         f"Repairing Approve Database - setting '{key}:{val}' for {data['_id']}",
                     )
                     collection.update({"_id": data["_id"]}, {key: val})
