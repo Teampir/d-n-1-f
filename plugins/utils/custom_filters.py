@@ -25,7 +25,6 @@ from pyrogram.types import CallbackQuery, Message
 from database.disable_db import Disabling
 from Alita import tlang
 from plugins.utils.caching import ADMIN_CACHE, admin_cache_reload
-from Alita import Config
 
 OWNER_ID = int(config("OWNER_ID", default=1198820588))
 DEV_USERS = [int(i) for i in config("DEV_USERS", default="1198820588").split()]
