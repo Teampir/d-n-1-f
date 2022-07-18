@@ -1,3 +1,10 @@
+import logging
+import logging.config
+
+# Get logging configurations
+logging.config.fileConfig('logging.conf')
+logging.getLogger().setLevel(logging.INFO)
+
 from functools import reduce
 from glob import glob
 from operator import getitem
@@ -50,13 +57,13 @@ def tlang(m, user_msg):
         try:
             lang = Langs(m.chat.id).get_lang()
         except Exception as ef:
-            LOGGER.error(f"Lang Error: {ef}")
+            logging.error(f"Lang Error: {ef}")
             lang = default_lang
-            LOGGER.error(format_exc())
+            logging.error(format_exc())
 
         # Raise exception if lang_code not found
         if lang not in ENABLED_LOCALES:
-            LOGGER.error("Non-enabled locale used by user!")
+            logging.error("Non-enabled locale used by user!")
             lang = default_lang
 
         # Get lang
@@ -69,6 +76,6 @@ def tlang(m, user_msg):
             m_args.pop(0)
             m_args.insert(0, default_lang)
             txt = reduce(getitem, m_args, lang_dict)
-            LOGGER.error(format_exc())
+            logging.error(format_exc())
 
         return txt
