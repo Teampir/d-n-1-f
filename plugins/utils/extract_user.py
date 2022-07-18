@@ -1,3 +1,10 @@
+import logging
+import logging.config
+
+# Get logging configurations
+logging.config.fileConfig('logging.conf')
+logging.getLogger().setLevel(logging.INFO)
+
 from traceback import format_exc
 from typing import Tuple
 
@@ -40,8 +47,8 @@ async def extract_user(c: Alita, m: Message) -> Tuple[int, str, str]:
                     if "invalid literal for int() with base 10:" in str(ef):
                         user_found = str(user_found)
                     else:
-                        LOGGER.error(ef)
-                        LOGGER.error(format_exc())
+                        logging.error(ef)
+                        logging.error(format_exc())
 
                 try:
                     user = Users.get_user_info(user_found)
@@ -61,8 +68,8 @@ async def extract_user(c: Alita, m: Message) -> Tuple[int, str, str]:
                     user_id = user_found
                     user_first_name = user_found
                     user_name = ""
-                    LOGGER.error(ef)
-                    LOGGER.error(format_exc())
+                    logging.error(ef)
+                    logging.error(format_exc())
 
         else:
             try:
@@ -76,8 +83,8 @@ async def extract_user(c: Alita, m: Message) -> Tuple[int, str, str]:
                     )
                 else:
                     user_id = m.text.split()[1]
-                    LOGGER.error(ef)
-                    LOGGER.error(format_exc())
+                    logging.error(ef)
+                    logging.error(format_exc())
 
             if user_id is not None:
                 try:
@@ -91,8 +98,8 @@ async def extract_user(c: Alita, m: Message) -> Tuple[int, str, str]:
                         return await m.reply_text(f"User not found ! Error: {ef}")
                     user_first_name = user.first_name
                     user_name = user.username
-                    LOGGER.error(ef)
-                    LOGGER.error(format_exc())
+                    logging.error(ef)
+                    logging.error(format_exc())
 
     else:
         user_id = m.from_user.id
