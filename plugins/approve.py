@@ -25,7 +25,7 @@ from plugins.utils.kbhelpers import ikb
 from plugins.utils.parser import mention_html
 
 LOGGER = True
-SUPPORT_GROUP = int(config("SUPPORT_GROUP", default="DivideProjectsDiscussion"))
+SUPPORT_GROUP = int(config("SUPPORT_GROUP", default=""))
 
 @Alita.on_message(command("approve") & admin_filter)
 async def approve_user(c: Alita, m: Message):
