@@ -69,7 +69,7 @@ class Users(MongoDB):
         if not chat_data:
             new_data = {"_id": self.user_id, "username": "", "name": "unknown_till_now"}
             self.insert_one(new_data)
-            LOGGER.info(f"Initialized User Document for {self.user_id}")
+            logging.info(f"Initialized User Document for {self.user_id}")
             return new_data
         return chat_data
 
@@ -96,7 +96,7 @@ class Users(MongoDB):
 
 def __pre_req_users():
     start = time()
-    LOGGER.info("Starting Users Database Repair...")
+    logging.info("Starting Users Database Repair...")
     collection = MongoDB(Users.db_name)
     Users.repair_db(collection)
-    LOGGER.info(f"Done in {round((time() - start), 3)}s!")
+    logging.info(f"Done in {round((time() - start), 3)}s!")
