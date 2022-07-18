@@ -2,7 +2,6 @@ from pyrogram import filters
 from pyrogram.errors import PeerIdInvalid, RPCError, UserNotParticipant
 from pyrogram.types import CallbackQuery, ChatPermissions, Message
 
-from info import LOGGER, SUPPORT_GROUP
 from pyrogram import Client as Alita
 from database.approve_db import Approve
 from plugins.utils.custom_filters import admin_filter, command, owner_filter
@@ -10,6 +9,8 @@ from plugins.utils.extract_user import extract_user
 from plugins.utils.kbhelpers import ikb
 from plugins.utils.parser import mention_html
 
+LOGGER = True
+SUPPORT_GROUP = int(config("SUPPORT_GROUP", default="DivideProjectsDiscussion"))
 
 @Alita.on_message(command("approve") & admin_filter)
 async def approve_user(c: Alita, m: Message):
