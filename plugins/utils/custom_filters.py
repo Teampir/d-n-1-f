@@ -1,3 +1,10 @@
+import logging
+import logging.config
+
+# Get logging configurations
+logging.config.fileConfig('logging.conf')
+logging.getLogger().setLevel(logging.INFO)
+
 from re import compile as compile_re
 from re import escape
 from shlex import split
