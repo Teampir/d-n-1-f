@@ -1,3 +1,10 @@
+import logging
+import logging.config
+
+# Get logging configurations
+logging.config.fileConfig('logging.conf')
+logging.getLogger().setLevel(logging.INFO)
+
 from threading import RLock
 from time import perf_counter, time
 from typing import List
@@ -44,7 +51,7 @@ async def admin_cache_reload(m: Message or CallbackQuery, status=None) -> List[i
             if not z.user.is_deleted
         ]
         ADMIN_CACHE[m.chat.id] = admin_list
-        LOGGER.info(
+        logging.info(
             f"Loaded admins for chat {m.chat.id} in {round((time() - start), 3)}s due to '{status}'",
         )
         TEMP_ADMIN_CACHE_BLOCK[m.chat.id] = "autoblock"
