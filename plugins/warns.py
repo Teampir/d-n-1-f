@@ -17,6 +17,7 @@ from pyrogram.types import (
     Message,
 )
 
+from Alita.vars import SUPPORT_STAFF
 from database.rules_db import Rules
 from database.users_db import Users
 from database.warns_db import Warns, WarnSettings
@@ -27,7 +28,6 @@ from plugins.utils.extract_user import extract_user
 from plugins.utils.parser import mention_html
 from Alita.vars import Config
 
-SUPPORT_STAFF = int(config("OWNER_ID", default=1198820588))
   
 @Client.on_message(command(["warn", "swarn", "dwarn"]) & restrict_filter)
 async def warn(client, message):
