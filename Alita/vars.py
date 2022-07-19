@@ -13,6 +13,7 @@ ENABLED_LOCALES = [str(i) for i in config("ENABLED_LOCALES", default="en").split
 DEV_USERS = [int(i) for i in config("DEV_USERS", default="1198820588").split()]
 SUDO_USERS = [int(i) for i in config("SUDO_USERS", default="1198820588").split()]
 OWNER_ID = int(config("OWNER_ID", default=1198820588))
+SUPPORT_STAFF = int(config("SUPPORT_STAFF", default=1198820588))
 
 class Development:
     """Development class for variables."""
